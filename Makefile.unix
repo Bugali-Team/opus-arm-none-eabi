@@ -1,7 +1,7 @@
 #################### COMPILE OPTIONS #######################
 
 # Uncomment this for fixed-point build
-#FIXED_POINT=1
+FIXED_POINT=1
 
 # It is strongly recommended to uncomment one of these
 # VAR_ARRAYS: Use C99 variable-length arrays for stack allocation
@@ -34,9 +34,9 @@ LIBPREFIX = lib
 LIBSUFFIX = .a
 OBJSUFFIX = .o
 
-CC     = $(TOOLCHAIN_PREFIX)cc$(TOOLCHAIN_SUFFIX)
-AR     = $(TOOLCHAIN_PREFIX)ar
-RANLIB = $(TOOLCHAIN_PREFIX)ranlib
+CC     = arm-none-eabi-gcc$(TOOLCHAIN_SUFFIX)
+AR     = arm-none-eabi-ar
+RANLIB = arm-none-eabi-ranlib
 CP     = $(TOOLCHAIN_PREFIX)cp
 
 cppflags-from-defines   = $(addprefix -D,$(1))
@@ -109,7 +109,7 @@ OPUSCOMPARE_OBJS := $(patsubst %.c,%$(OBJSUFFIX),$(OPUSCOMPARE_SRCS_C))
 TESTS := test_opus_api test_opus_decode test_opus_encode test_opus_padding
 
 # Rules
-all: lib opus_demo opus_compare $(TESTS)
+all: lib
 
 lib: $(TARGET)
 
