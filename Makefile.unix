@@ -15,7 +15,15 @@ CFLAGS := -DUSE_ALLOCA $(CFLAGS)
 CFLAGS := -DHAVE_LRINTF $(CFLAGS)
 
 # Float ABI: enable hard float support
-CFLAGS := -mfloat-abi=hard $(CFLAGS)
+CFLAGS := -mfloat-abi=hard -mfpu=fpv4-sp-d16 $(CFLAGS)
+
+# Set properties for our micro-processor
+CFLAGS := -mcpu=cortex-m4 -mthumb -mabi=aapcs -ffunction-sections -fdata-sections -fno-strict-aliasing $(CFLAGS)
+CFLAGS := -fno-builtin -fshort-enums $(CFLAGS)
+
+LDFLAGS := -mthumb -mabi=aapcs -mcpu=cortex-m4 -Wl,--gc-sections --specs=nano.specs $(LDFLAGS)
+
+LIBS := c nosys $(LIBS)
 
 ###################### END OF OPTIONS ######################
 
